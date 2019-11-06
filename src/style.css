@@ -1,0 +1,29 @@
+.person-image{
+    height: 300px; 
+}
+
+.action-buttons img{
+    width: 5em;
+}
+img.disabled {
+    opacity: 0.2; 
+}
+
+.pulse img{
+    background: white;
+    border: none;
+}
+
+#lonely-liked-people{ 
+    display:flex; 
+    flex-direction: row;
+    justify-content: space-between; 
+    width: 600px;
+    align: center;  
+    margin: 50px; 
+}
+
+img.liked-person-image{ 
+    height: 100px; 
+    padding: 30px
+}
