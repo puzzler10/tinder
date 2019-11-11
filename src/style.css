@@ -1,29 +1,195 @@
-.person-image{
-    height: 300px; 
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: url(https://free.bboxtype.com/embedfonts/fonts.php?family=FiraSans&weight=300) format('woff');
+    font-display: swap;
 }
 
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url(https://free.bboxtype.com/embedfonts/fonts.php?family=FiraSans&weight=700) format('woff');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://free.bboxtype.com/embedfonts/fonts.php?family=FiraSans&weight=400i) format('woff');
+    font-style: italic; 
+    font-display: swap;
+}
+
+
+
+/* //////////////// App-wide  /////////////////// */
+p, h1, h2, h3, h4, h5, h6 {
+    text-align: inherit; 
+    font-family: 'Fira Sans', sans-serif;
+}
+
+#app{
+    margin: 10px; 
+}
+:root{
+    --button-height: 10vh; 
+    --background-image-color: rgb(247, 243, 243, 0.5);
+}
+
+
+/* /////////////// Header /////////////////////// */
+header{
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: white;
+    padding-top: 5px; 
+    padding-bottom: 5px; 
+    box-shadow: 0px 2px 3px 0 rgba(0,0,0,0.1);
+}
+
+header button{
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer; 
+    max-width: 60px;
+}
+
+header img{
+    width: 100%;
+}
+
+header .fl{
+    width: 33%;
+}
+header .fl:first-child {
+	text-align: left;
+}
+header .fl:nth-child(2){
+    text-align:center;
+}
+header .fl:last-child {
+	text-align: right;
+}
+
+
+/* //////////////// Main screen /////////////////// */
+.person {
+    max-width: 700px; 
+    display: block; 
+    margin: 0 auto;
+    height: 70vh; 
+    overflow-y: auto;
+    overflow-x: hidden; 
+}
+
+.person .person-image{
+    width: 100%; 
+    margin-top: 20px;  
+    max-height: 400px; 
+    object-fit: contain;
+    background: var(--background-image-color)
+}   
+@media (max-width: 400px){ .person {max-width: 400px;}    .person.person-image{ max-height: 250px;} }
+@media (max-width: 600px){ .person {max-width: 600px;}    .person.person-image{ max-height: 300px;}}
+@media (max-width: 800px){ .person {max-width: 600px;}   .person.person-image{ max-height: 350px;}}
+@media (max-width: 1000px){ .person {max-width: 600px;}  .person.person-image{ max-height: 400px;}}
+
+.person .person-text{
+    text-align: left; 
+}
+
+p.person-name-age{
+    font-weight: 700; 
+    line-height: 0.4em;   
+}
+p.person-desc{
+    line-height: 0.4em;   
+}
+p.person-quote{
+    font-style:italic; 
+    color: #767676;
+    margin-top: 2em; 
+    line-height: normal; 
+    margin-right: 2em; 
+}
+
+
+/* /////// Buttons /////////  */
+.action-buttons{
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+    max-width: 600px;   
+    left: 50%;
+    transform: translateX(-50%); 
+    margin-bottom: 3vh; 
+    height: var(--button-height);
+    max-height: 200px; 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+}
 .action-buttons img{
-    width: 5em;
+    width: 20vw; 
+    object-fit: contain;
 }
 img.disabled {
     opacity: 0.2; 
+}   
+
+
+/* //////////////// Lonely screen /////////////////// */
+
+#lonely p{
+    text-align: center; 
+    color: #767676
+}
+#lonely p.subtitle{
+    text-align: center; 
+    color: #c7c1c1;
+    /* line-height: 0.4em;  */
+    margin-top: 0; 
+
+}
+#lonely h3, #lonely h4{
+    text-align: center; 
+    margin-bottom: 4px; 
 }
 
+/* Pulse */
+span.pulse{
+    margin-bottom: 70px;
+    margin-top: 30px; 
+}
 .pulse img{
     background: white;
     border: none;
 }
 
-#lonely-liked-people{ 
-    display:flex; 
-    flex-direction: row;
-    justify-content: space-between; 
-    width: 600px;
-    align: center;  
-    margin: 50px; 
-}
+/*  Liked people */
+#lonely-liked-people, #lonely-superliked-people{ 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px; 
+    max-width: 960px;
+    margin: 0 auto 30px;
+    margin-bottom: 70px; 
 
-img.liked-person-image{ 
-    height: 100px; 
-    padding: 30px
 }
+#lonely-liked-people img, #lonely-superliked-people img{ 
+    height: 200px; 
+    width: 100%; 
+    object-fit: contain;
+    background: #f0ecec
+}
+@media (max-width: 1200px) {  #lonely-liked-people, #lonely-superliked-people {column-count: 4;}}
+@media (max-width: 1000px) {  #lonely-liked-people, #lonely-superliked-people {column-count: 3;}}
+@media (max-width: 800px) {   #lonely-liked-people, #lonely-superliked-people {column-count: 2;}}
+@media (max-width: 400px) {   #lonely-liked-people, #lonely-superliked-people {column-count: 1;}}
+
+

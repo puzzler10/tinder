@@ -2,22 +2,22 @@ import React, {useState} from 'react';
 import Person from './components/Person';
 import Actions from './components/Actions'; 
 import Lonely from './components/Lonely'; 
+import Header from './components/Header';
 import './style.css';
 import './pulse.css';
 import data from './data.json'; 
  
 function App() {
   const [peopleList, setPeopleList] = useState(data)
-  const [likedList, setLikedList] = useState([]); 
-  const [superlikedList, setSuperlikedList] = useState([]); 
-  const [dislikedList, setDislikedList] = useState([]); 
+  var [likedList, setLikedList] = useState([]); 
+  var [superlikedList, setSuperlikedList] = useState([]); 
+  var [dislikedList, setDislikedList] = useState([]); 
   //for Rewind
-  const [seenPeopleList, setSeenPeopleList] = useState([]); 
+  var [seenPeopleList, setSeenPeopleList] = useState([]); 
 
   // active person is always at index 0. To change people, 
   // we'll remove items from peopleList one by one. 
   const activePerson = 0;
-  console.log(peopleList.length) 
 
   const addToList = (action, userId) => {
     switch(action){
@@ -32,17 +32,23 @@ function App() {
         break;
       case 'REWIND':
         setPeopleList([seenPeopleList[0]].concat(peopleList));
+        var lastId = seenPeopleList[0].id;
+        // Remove user from liked and superliked list if they are there 
+        setLikedList(likedList.filter(o=>o.id !== lastId))
+        setDislikedList(dislikedList.filter(o=>o.id !== lastId)); 
+        setSuperlikedList(superlikedList.filter(o=>o.id !== lastId));
         break;
       default: 
     }
     // each person seen is added to start of seenPeopleList (i.e. at index 0)
     // unless we're rewinding. If we are, we have to remove them. 
-    (action==='REWIND') ? setSeenPeopleList(seenPeopleList.slice(1)): setSeenPeopleList([peopleList[activePerson]].concat(seenPeopleList)) 
+    (action === 'REWIND') ? setSeenPeopleList(seenPeopleList.slice(1)): setSeenPeopleList([peopleList[activePerson]].concat(seenPeopleList)) 
     if (action !== 'REWIND')  setPeopleList(peopleList.slice(1))
   }
 
   return ( 
     <div id='app'>
+      <Header />
       {(peopleList.length !== 0) ? (
         <>
           <Person 
